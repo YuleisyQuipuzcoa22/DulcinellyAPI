@@ -44,32 +44,6 @@ cd DulcinellyAPI
 npm install
 ```
 
-3. **Configurar variables de entorno:**
-Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
-```env
-# Puerto del servidor
-PORT=3000
-
-# Base de datos MySQL
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=tu_contraseña
-DB_NAME=dulcinelly_db
-DB_PORT=3306
-
-# JWT
-JWT_SECRET=tu_secreto_jwt_muy_seguro
-JWT_EXPIRATION=7d
-
-# Entorno
-NODE_ENV=development
-```
-
-4. **Crear la base de datos (opcional):**
-```bash
-mysql -u root -p < database/schema.sql
-```
-
 ## ▶️ Ejecución
 
 ### Modo Desarrollo (con hot reload)
@@ -93,8 +67,7 @@ DulcinellyAPI/
 │   ├── controllers/       # Lógica de controladores
 │   ├── models/            # Modelos de datos
 │   ├── middleware/        # Middleware personalizado
-│   └── config/            # Configuraciones (BD, JWT, etc)
-├── .env                   # Variables de entorno
+│   └── config/            # Configuraciones (BD, JWT, etc)                
 ├── .gitignore             # Archivos ignorados por git
 ├── package.json           # Dependencias del proyecto
 └── README.md              # Este archivo
@@ -120,76 +93,3 @@ La API utiliza **JWT (JSON Web Tokens)** para autenticación. Después de login,
 ```
 Authorization: Bearer <tu_token_jwt>
 ```
-
-## 📤 Subida de Archivos
-
-Los archivos se manejan mediante **Multer**. Los archivos se guardan en la carpeta `/uploads`.
-
-```bash
-POST /api/upload
-Content-Type: multipart/form-data
-Body: archivo
-```
-
-## 🐛 Troubleshooting
-
-### Error de conexión a BD
-- Verifica que MySQL esté corriendo: `mysql -u root -p`
-- Comprueba las credenciales en `.env`
-- Asegúrate de que la base de datos existe
-
-### Error de puerto en uso
-```bash
-# En Windows
-netstat -ano | findstr :3000
-taskkill /PID <PID> /F
-
-# En Mac/Linux
-lsof -i :3000
-kill -9 <PID>
-```
-
-### Errores de JWT
-- Verifica que `JWT_SECRET` esté configurado en `.env`
-- Asegúrate de enviar el token en el header `Authorization`
-
-## 📝 Ejemplo de Uso
-
-### Login
-```bash
-curl -X POST http://localhost:3000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"user@example.com","password":"password123"}'
-```
-
-### Acceder a recurso protegido
-```bash
-curl -X GET http://localhost:3000/api/users \
-  -H "Authorization: Bearer <token_aqui>"
-```
-
-## 🤝 Contribución
-
-Si deseas contribuir al proyecto:
-
-1. Fork el repositorio
-2. Crea una rama para tu feature: `git checkout -b feature/AmazingFeature`
-3. Commit tus cambios: `git commit -m 'Add some AmazingFeature'`
-4. Push a la rama: `git push origin feature/AmazingFeature`
-5. Abre un Pull Request
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia **ISC**.
-
-## 👨‍💻 Autor
-
-**Yuleisy Quipuzcoa** - [GitHub](https://github.com/YuleisyQuipuzcoa22)
-
-## 📞 Soporte
-
-Para reportar problemas o sugerencias, abre un [issue](https://github.com/YuleisyQuipuzcoa22/DulcinellyAPI/issues) en el repositorio.
-
----
-
-**¡Gracias por usar DulcinellyAPI!** 🎉
